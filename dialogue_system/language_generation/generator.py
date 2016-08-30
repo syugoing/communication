@@ -10,17 +10,17 @@ class LanguageGenerator(object):
     def generate_sentence(self, dialogue_act):
         sent = ''
         if 'LOCATION' in dialogue_act:
-            sent += '場所は{0}ですね。'.format(dialogue_act['LOCATION'])
+            sent += '質問の科目は{0}ですね。'.format(dialogue_act['LOCATION'])
         if 'GENRE' in dialogue_act:
-            sent += '{0}ですね。'.format(dialogue_act['GENRE'])
+            sent += '{0}先生ですね。'.format(dialogue_act['GENRE'])
         if 'MAXIMUM_AMOUNT' in dialogue_act:
             sent += '予算は{0}円ですね。'.format(dialogue_act['MAXIMUM_AMOUNT'])
 
         sys_act_type = dialogue_act['sys_act_type']
         if sys_act_type == 'REQUEST_LOCATION':
-            sent += '場所はどのあたりですか？'
+            sent += '質問の科目は何ですか？'
         elif sys_act_type == 'REQUEST_GENRE':
-            sent += '料理のジャンルを教えてください。'
+            sent += '質問したい先生がいたら教えてください。'
         elif sys_act_type == 'REQUEST_BUDGET':
             sent += '予算の上限はどのくらいですか？'
         elif sys_act_type == 'CHAT':

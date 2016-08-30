@@ -19,3 +19,17 @@ def read_genres():
         genres = yaml.load(f)
 
     return genres
+
+def read_subject():
+    file_path = os.path.join(BASE_DIR, 'subject.txt')
+    with open(file_path, 'rb') as f:
+        subjects = [loc.decode('utf-8').strip() for loc in f]
+
+    return subjects
+
+def read_teacher():
+    file_path = os.path.join(BASE_DIR, 'teacher.yaml')
+    with open(file_path, 'rb') as f:
+        teachers = yaml.load(f)
+
+    return teachers
