@@ -22,12 +22,12 @@ class DialogueManager(object):
             reply = "こんにちは"
             sys_act['sys_act_type'] = 'CHAT'
             sys_act['utt'] = reply
-        elif not self.dialogue_state.has('LOCATION'):
-            sys_act['sys_act_type'] = 'REQUEST_LOCATION'
-        elif not self.dialogue_state.has('GENRE'):
-            sys_act['sys_act_type'] = 'REQUEST_GENRE'
-        elif not self.dialogue_state.has('MAXIMUM_AMOUNT'):
-            sys_act['sys_act_type'] = 'REQUEST_BUDGET'
+        elif not self.dialogue_state.has('SUBJECT'):
+            sys_act['sys_act_type'] = 'REQUEST_SUBJECT'
+        elif not self.dialogue_state.has('TEACHER'):
+            sys_act['sys_act_type'] = 'REQUEST_TEACHER'
+        elif not self.dialogue_state.has('REPLY'):
+            sys_act['sys_act_type'] = 'REQUEST_REPLY'
         else:
             api = HotPepperGourmetAPI()
             area = self.dialogue_state.get_area()

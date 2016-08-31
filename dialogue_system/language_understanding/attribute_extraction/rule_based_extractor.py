@@ -2,7 +2,7 @@
 import re
 
 
-from dialogue_system.knowledge.reader import read_genres, read_locations, read_subject, read_teacher
+from dialogue_system.knowledge.reader import read_genres, read_locations, read_subject, read_teacher, read_yes, read_no
 from dialogue_system.language_understanding.utils.utils import kansuji2arabic
 
 
@@ -13,10 +13,13 @@ class RuleBasedAttributeExtractor(object):
         self.__genres = read_genres()
         self.__subject = read_subject()
         self.__teacher = read_teacher()
+        self.__yes = read_yes()
+        self.__no = read_no()
+
 
     def extract(self, text):
-        attribute = {'LOCATION': self.__extract_subject(text), 'GENRE': self.__extract_teacher(text),
-                     'MAXIMUM_AMOUNT': self.__extract_budget(text)}
+        attribute = {'SUBJECT': self.__extract_subject(text), 'TEACHER': self.__extract_teacher(text),
+                     'REPLY': self.__extract_reply(text)}
 
         return attribute
 
@@ -26,6 +29,18 @@ class RuleBasedAttributeExtractor(object):
         subject = subjects[0] if len(subjects) > 0 else ''
 
         return subject
+
+    def __extract_reply(self, text): #返答診断
+        replys = [loc for loc in self.__yes if loc in text]
+        replys.sort(key=len, reverse=True)
+        reply = "yes" if len(replys) > 0 else ''
+        if reply in "":
+            replys = [loc for loc in self.__no if loc in text]
+            replys.sort(key=len, reverse=True)
+            reply = "no" if len(replys) > 0 else ''
+
+        return reply
+
 
     def __extract_teacher(self, text): #先生の判別
         for teacher_full, teachers in self.__teacher.items():

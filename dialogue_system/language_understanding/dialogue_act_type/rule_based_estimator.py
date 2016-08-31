@@ -7,11 +7,11 @@ class RuleBasedDialogueActTypeEstimator(object):
         pass
 
     def estimate(self, attribute):
-        if attribute['GENRE'] != '':
-            return 'INFORM_GENRE'
-        elif attribute['LOCATION'] != '':
-            return 'INFORM_LOC'
-        elif attribute['MAXIMUM_AMOUNT'] != '':
-            return 'INFORM_MONEY'
+        if attribute['TEACHER'] != '':
+            return 'INFORM_TEACHER'
+        elif attribute['SUBJECT'] != '':
+            return 'INFORM_SUBJECT'
+        elif attribute['REPLY'] != '':
+            return 'INFORM_REPLY'
         else:
             return 'OTHER'
