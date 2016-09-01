@@ -2,7 +2,7 @@
 import re
 
 
-from dialogue_system.knowledge.reader import read_genres, read_locations, read_subject, read_teacher, read_yes, read_no
+from dialogue_system.knowledge.reader import read_genres, read_locations, read_subject, read_teacher, read_yes, read_no, read_picture
 from dialogue_system.language_understanding.utils.utils import kansuji2arabic
 
 
@@ -15,11 +15,12 @@ class RuleBasedAttributeExtractor(object):
         self.__teacher = read_teacher()
         self.__yes = read_yes()
         self.__no = read_no()
+        self.__picture = read_picture()
 
 
     def extract(self, text):
         attribute = {'SUBJECT': self.__extract_subject(text), 'TEACHER': self.__extract_teacher(text),
-                     'REPLY': self.__extract_reply(text)}
+                     'REPLY': self.__extract_reply(text),}
 
         return attribute
 
@@ -48,6 +49,13 @@ class RuleBasedAttributeExtractor(object):
                 if teacher in text:
                     return teacher_full
         return ''
+
+    def __extract_picture(self, text): #写真
+        subjects = [loc for loc in self.__picture if loc in text]
+        subjects.sort(key=len, reverse=True)
+        subject = subjects[0] if len(subjects) > 0 else ''
+
+        return subject
 
     def __extract_genre(self, text):
         for food_genre, foods in self.__genres.items():

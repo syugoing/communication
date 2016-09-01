@@ -47,3 +47,10 @@ def read_no():
         noreply = [loc.decode('utf-8').strip() for loc in f]
 
     return noreply
+
+def read_picture():
+    file_path = os.path.join(BASE_DIR, 'picture.txt')
+    with open(file_path, 'rb') as f:
+        picture = [loc.decode('utf-8').strip() for loc in f]
+
+    return picture
