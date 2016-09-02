@@ -20,7 +20,7 @@ class RuleBasedAttributeExtractor(object):
 
     def extract(self, text):
         attribute = {'SUBJECT': self.__extract_subject(text), 'TEACHER': self.__extract_teacher(text),
-                     'REPLY': self.__extract_reply(text),}
+                     'REPLY': self.__extract_reply(text), 'PICTURE': self.__extract_picture(text)}
 
         return attribute
 

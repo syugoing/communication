@@ -13,5 +13,7 @@ class RuleBasedDialogueActTypeEstimator(object):
             return 'INFORM_SUBJECT'
         elif attribute['REPLY'] != '':
             return 'INFORM_REPLY'
+        elif attribute['PICTURE'] != '':
+            return 'INFORM_PICTURE'
         else:
             return 'OTHER'

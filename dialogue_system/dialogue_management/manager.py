@@ -19,7 +19,7 @@ class DialogueManager(object):
         if dialogue_act['user_act_type'] == 'OTHER':
 #            api = DocomoDialogAPI()
 #            reply = api.reply(dialogue_act['utt'])
-            reply = "こんにちは"
+            reply = "もう一度お願いします"
             sys_act['sys_act_type'] = 'CHAT'
             sys_act['utt'] = reply
         elif not self.dialogue_state.has('SUBJECT'):
@@ -28,6 +28,8 @@ class DialogueManager(object):
             sys_act['sys_act_type'] = 'REQUEST_TEACHER'
         elif not self.dialogue_state.has('REPLY'):
             sys_act['sys_act_type'] = 'REQUEST_REPLY'
+        elif not self.dialogue_state.has('PICTURE'):
+            sys_act['sys_act_type'] = 'REQUEST_PICTURE'
         else:
             api = HotPepperGourmetAPI()
             area = self.dialogue_state.get_area()
